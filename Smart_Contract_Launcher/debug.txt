@@ -1,10 +1,1 @@
-{
-  errors: [
-    {
-      component: 'general',
-      errorCode: '3628',
-      formattedMessage: 'Ropsten.sol:5:1: Warning: This contract has a payable fallback function, but no receive ether function. Consider adding a receive ether function.\n' +
-        'contra
-  ],
-  sources: {}
-}
+Roman
