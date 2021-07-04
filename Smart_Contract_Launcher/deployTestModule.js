@@ -22,13 +22,13 @@ const rinkeby_connect = 'https://rinkeby.infura.io/v3/f5759990ab43442c919c2e9594
 const ropsten_connect = 'https://ropsten.infura.io/v3/f5759990ab43442c919c2e9594a022cd';
 
 var providerMain = new HDWalletProvider(
- 'index bracket clog acoustic lamp egg orient price pill federal else glory',
+  'tongue august shock scrub drive distance rescue ivory museum opera left warfare',
  rinkeby_connect
 );
 
 var providerRopsten = new HDWalletProvider(
- 'index bracket clog acoustic lamp egg orient price pill federal else glory',
- rinkeby_connect
+  'tongue august shock scrub drive distance rescue ivory museum opera left warfare',
+ ropsten_connect
 );
 
 var web3Main = new Web3(providerMain);

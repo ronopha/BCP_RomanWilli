@@ -9,7 +9,7 @@ bytecode = evm.bytecode.object;
 var rinkeby_connect = 'https://rinkeby.infura.io/v3/f5759990ab43442c919c2e9594a022cd'
 var ropsten_connect = 'https://ropsten.infura.io/v3/f5759990ab43442c919c2e9594a022cd'
 var provider = new HDWalletProvider(
- 'index bracket clog acoustic lamp egg orient price pill federal else glory',
+  'tongue august shock scrub drive distance rescue ivory museum opera left warfare',
  rinkeby_connect
 );
 var web3 = new Web3(provider);
