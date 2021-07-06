@@ -1,5 +1,6 @@
 var HDWalletProvider = require('truffle-hdwallet-provider');
 var Web3 = require('web3');
+fs = require('fs');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 //Infura Links
@@ -8,7 +9,7 @@ var rinkeby_connect = 'https://rinkeby.infura.io/v3/f5759990ab43442c919c2e9594a0
 
 //Providers
 var providerMain = new HDWalletProvider(
-  'suspect beach curious output hunt mutual job divert august canvas account anger',
+  'bubble shy ivory siren stamp latin number anger naive eager balance struggle',
   rinkeby_connect
  );
  
@@ -89,11 +90,36 @@ const records = [
   {name: 'Main (Rinkeby) Test Module',  deployedfrom: resultTestModul.deployedfrom, deployedto: resultTestModul.mainTestAddress,  abi: JSON.stringify(resultTestModul.abiMainTest), bytecode: JSON.stringify(resultTestModul.bytecodeMainTest)}
 ];
 
-csvWriter.writeRecords(records)       // returns a promise
+
+
+
+  fs.writeFile('abiMain.json', JSON.stringify(resultMain.abiMain), function (err) {
+    if (err) return console.log(err);
+    console.log('abiMain > abiMain.json');
+  });
+  
+  fs.writeFile('abiMainTest.json', JSON.stringify(resultTestModul.abiMainTest), function (err) {
+    if (err) return console.log(err);
+    console.log('abiMainTest > abiMainTest.json');
+  });
+  
+  fs.writeFile('bytecodeMain.json', JSON.stringify(resultMain.bytecodeMain), function (err) {
+    if (err) return console.log(err);
+    console.log('bytecodeMain > bytecodeMain.json');
+  });
+  
+  fs.writeFile('bytecodeMainTest.json', JSON.stringify(resultTestModul.bytecodeMainTest), function (err) {
+    if (err) return console.log(err);
+    console.log('bytecodeMainTest > bytecodeMainTest.json');
+  });
+  
+  console.log('Main.csv created');
+
+
+  csvWriter.writeRecords(records)       // returns a promise
   .then(() => {
       console.log('...Done');
-  });
-
+  }); 
 
 
 };

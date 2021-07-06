@@ -1,5 +1,6 @@
 var HDWalletProvider = require('truffle-hdwallet-provider');
 var Web3 = require('web3');
+fs = require('fs');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 
@@ -10,7 +11,7 @@ var ropsten_connect = 'https://ropsten.infura.io/v3/f5759990ab43442c919c2e9594a0
 //Providers
 
  var providerRopsten = new HDWalletProvider(
-  'suspect beach curious output hunt mutual job divert august canvas account anger',
+  'bubble shy ivory siren stamp latin number anger naive eager balance struggle',
   ropsten_connect
  );
 
@@ -93,12 +94,38 @@ var ropstenWriter = async (resultRopsten, resultTestModulRopsten) => {
     {name: 'Ropsten Test Module',  deployedfrom: resultTestModulRopsten.deployedfrom, deployedto: resultTestModulRopsten.RopstenTestAddress,  abi: JSON.stringify(resultTestModulRopsten.abiRopstenTest), bytecode: JSON.stringify(resultTestModulRopsten.bytecodeRopstenTest)}
   ];
   
-  csvWriter.writeRecords(records)       // returns a promise
+
+    fs.writeFile('abiRopsten.json', JSON.stringify(resultRopsten.abiRopsten), function (err) {
+      if (err) return console.log(err);
+      console.log('abiRopsten > abiRopsten.json');
+    });
+    
+    fs.writeFile('abiRopstenTest.json', JSON.stringify(resultTestModulRopsten.abiRopstenTest), function (err) {
+      if (err) return console.log(err);
+      console.log('abiRopstenTest > abiRopstenTest.json');
+    });
+    
+    fs.writeFile('bytecodeRopsten.json', JSON.stringify(resultRopsten.bytecodeRopsten), function (err) {
+      if (err) return console.log(err);
+      console.log('bytecodeRopsten > bytecodeRopsten.json');
+    });
+    
+    fs.writeFile('bytecodeRopstenTest.json', JSON.stringify(resultTestModulRopsten.bytecodeRopstenTest), function (err) {
+      if (err) return console.log(err);
+      console.log('bytecodeRopstenTest > bytecodeRopstenTest.json');
+    });
+    
+
+    console.log('Ropsten.csv created');
+
+
+
+    csvWriter.writeRecords(records)       // returns a promise
     .then(() => {
         console.log('...Done');
     });
-  
-  
+
+
   
   };
 
