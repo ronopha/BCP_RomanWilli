@@ -4,6 +4,7 @@ var Web3 = require('web3');
 //Infura Links
 var rinkeby_connect = 'https://rinkeby.infura.io/v3/f5759990ab43442c919c2e9594a022cd'
 var ropsten_connect = 'https://ropsten.infura.io/v3/f5759990ab43442c919c2e9594a022cd'
+var kovan_connect = 'https://kovan.infura.io/v3/f5759990ab43442c919c2e9594a022cd'
 
 //Providers
 var providerMain = new HDWalletProvider(
@@ -13,7 +14,7 @@ var providerMain = new HDWalletProvider(
  
  var providerRopsten = new HDWalletProvider(
   'tongue august shock scrub drive distance rescue ivory museum opera left warfare',
-  ropsten_connect
+  rinkeby_connect
  );
 
  //web3 Instances
@@ -34,15 +35,17 @@ var deployMain = async () => {
     //Main
     var { abi, evm } = require('./compile.js').Main;
     bytecode = evm.bytecode.object;
-    
-  var accounts = await web3Main.eth.getAccounts();
-  var PUK =	 accounts[0];
+    abiMain = abi;
+    bytecodeMain = bytecode;
+
+  var accountsMain = await web3Main.eth.getAccounts();
+  var PUK =	 accountsMain[0];
   
   var sumText = [PIN, PUK, PUK2a, PUK2b, PUK2c]
-  console.log('Attempting to deploy Main from account:  ', accounts[0]);
-  result =await new web3Main.eth.Contract(abi)
-  .deploy({  data: bytecode, arguments: sumText })
-  .send({  from: accounts[0] });
+  console.log('Attempting to deploy Main from account:  ', accountsMain[0]);
+  result =await new web3Main.eth.Contract(abiMain)
+  .deploy({  data: bytecodeMain, arguments: sumText })
+  .send({  from: accountsMain[0] });
   mainAddress = result.options.address
   
  
@@ -59,13 +62,15 @@ var deployRopsten = async () => {
     //Ropsten
 var { abi, evm } = require('./compile.js').Ropsten;
 bytecode = evm.bytecode.object;
-  var accounts = await web3Ropsten.eth.getAccounts();
-  var PUK =	 accounts[0];
+abiRopsten = abi
+bytecodeRopsten = bytecode
+  var accountsRopsten = await web3Ropsten.eth.getAccounts();
+  var PUK =	 accountsRopsten[0];
   var sumText = [PIN, PUK, PUK2a, PUK2b, PUK2c]
-  console.log('Attempting to deploy Ropsten from account:  ', accounts[0]);
-  result =await new web3Ropsten.eth.Contract(abi)
-  .deploy({  data: bytecode, arguments: sumText })
-  .send({  from: accounts[0] });
+  console.log('Attempting to deploy Ropsten from account:  ', accountsRopsten[0]);
+  result =await new web3Ropsten.eth.Contract(abiRopsten)
+  .deploy({  data: bytecodeRopsten, arguments: sumText })
+  .send({  from: accountsRopsten[0] });
   ropstenAddress = result.options.address
   
  
@@ -83,28 +88,31 @@ address = [address];
 var { abi, evm } = require('./compile.js').TestModule;
 bytecode = evm.bytecode.object;
 
-abiRopsten = abi;
-bytecodeRopsten = bytecode;
+abiMainTest = abi;
+bytecodeMainTest = bytecode;
 
-  var accounts = await web3Main.eth.getAccounts();
+abiRopstenTest = abi;
+bytecodeRopstenTest = bytecode;
+
+  var accountsMainTest = await web3Main.eth.getAccounts();
  
-  console.log('Attempting to deploy MainTestModule from account', accounts[0]);
-  var result =await new web3Main.eth.Contract(abi)
-  .deploy({ data: bytecode, arguments: address })
-  .send({ gas: '3500000', from: accounts[0] });
+  console.log('Attempting to deploy MainTestModule from account', accountsMainTest[0]);
+  var result =await new web3Main.eth.Contract(abiMainTest)
+  .deploy({ data: bytecodeMainTest, arguments: address })
+  .send({ gas: '3500000', from: accountsMainTest[0] });
   var mainTestAddress = result.options.address
 
   //console.log('Contract MainTestModule bytecode:  \n', JSON.stringify(bytecode)); 
   //sconsole.log('Contract MainTestModule abi:   \n', JSON.stringify(abi)); 
   console.log('Contract MainTestModule deployed to:    \n', mainTestAddress); 
 
-   var accountsRopsten = await web3Ropsten.eth.getAccounts();
+   var accountsRopstenTest = await web3Ropsten.eth.getAccounts();
  
-  console.log('Attempting to deploy RopstenTestModule from account', accountsRopsten[0]);
-  var resultRopsten =await new web3Ropsten.eth.Contract(abiRopsten)
-  .deploy({ data: bytecodeRopsten, arguments: address })
-  .send({ from: accountsRopsten[0] });
-  var RopstenTestAddress = resultRopsten.options.address
+  console.log('Attempting to deploy RopstenTestModule from account', accountsRopstenTest[0]);
+  var resultRopstenTest =await new web3Ropsten.eth.Contract(abiRopstenTest)
+  .deploy({ data: bytecodeRopstenTest, arguments: address })
+  .send({ from: accountsRopstenTest[0] });
+  var RopstenTestAddress = resultRopstenTest.options.address
 
   //console.log('Contract RopstenTestModule bytecode:  \n', JSON.stringify(bytecode)); 
   //console.log('Contract RopstenTestModule abi:   \n', JSON.stringify(abi)); 
@@ -117,9 +125,9 @@ bytecodeRopsten = bytecode;
 
 async function asyncCall() {
   
-  const address = await deployMain();
+  const resultMain = await deployMain();
   const resultRopsten = await deployRopsten();
-  const resultTestModul = await deployTest(address);
+  const resultTestModul = await deployTest(resultMain);
 }
 
 asyncCall();
