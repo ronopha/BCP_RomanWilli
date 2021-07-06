@@ -75,7 +75,7 @@ bytecodeMainTest = bytecode;
 var mainWriter = async (resultMain, resultTestModul ) => {
 //Write in CSV-File
 const csvWriter = createCsvWriter({
-  path: 'Main.csv',
+  path: 'Export/Main.csv',
   header: [
       {id: 'name', title: 'NAME'},
       {id: 'deployedfrom', title: 'DEPLOYEDFROM'},
@@ -93,24 +93,24 @@ const records = [
 
 
 
-  fs.writeFile('abiMain.json', JSON.stringify(resultMain.abiMain), function (err) {
+  fs.writeFile('Export/abiMain.json', JSON.stringify(resultMain.abiMain), function (err) {
     if (err) return console.log(err);
     console.log('abiMain > abiMain.json');
   });
   
-  fs.writeFile('abiMainTest.json', JSON.stringify(resultTestModul.abiMainTest), function (err) {
+  fs.writeFile('Export/abiMainTest.json', JSON.stringify(resultTestModul.abiMainTest), function (err) {
     if (err) return console.log(err);
     console.log('abiMainTest > abiMainTest.json');
   });
   
-  fs.writeFile('bytecodeMain.json', JSON.stringify(resultMain.bytecodeMain), function (err) {
+  fs.writeFile('Export/bytecodeMain.json', JSON.stringify(resultMain.bytecodeMain), function (err) {
     if (err) return console.log(err);
     console.log('bytecodeMain > bytecodeMain.json');
   });
   
-  fs.writeFile('bytecodeMainTest.json', JSON.stringify(resultTestModul.bytecodeMainTest), function (err) {
+  fs.writeFile('Export/bytecodeMainTest.json', JSON.stringify(resultTestModul.bytecodeMainTest), function (err) {
     if (err) return console.log(err);
-    console.log('bytecodeMainTest > bytecodeMainTest.json');
+    console.log('Export/bytecodeMainTest > bytecodeMainTest.json');
   });
   
   console.log('Main.csv created');

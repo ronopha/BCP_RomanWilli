@@ -79,7 +79,7 @@ bytecodeRopstenTest = bytecode;
 var ropstenWriter = async (resultRopsten, resultTestModulRopsten) => {
   //Write in CSV-File
   const csvWriter = createCsvWriter({
-    path: 'Ropsten.csv',
+    path: 'Export/Ropsten.csv',
     header: [
         {id: 'name', title: 'NAME'},
         {id: 'deployedfrom', title: 'DEPLOYEDFROM'},
@@ -95,22 +95,22 @@ var ropstenWriter = async (resultRopsten, resultTestModulRopsten) => {
   ];
   
 
-    fs.writeFile('abiRopsten.json', JSON.stringify(resultRopsten.abiRopsten), function (err) {
+    fs.writeFile('Export/abiRopsten.json', JSON.stringify(resultRopsten.abiRopsten), function (err) {
       if (err) return console.log(err);
       console.log('abiRopsten > abiRopsten.json');
     });
     
-    fs.writeFile('abiRopstenTest.json', JSON.stringify(resultTestModulRopsten.abiRopstenTest), function (err) {
+    fs.writeFile('Export/abiRopstenTest.json', JSON.stringify(resultTestModulRopsten.abiRopstenTest), function (err) {
       if (err) return console.log(err);
       console.log('abiRopstenTest > abiRopstenTest.json');
     });
     
-    fs.writeFile('bytecodeRopsten.json', JSON.stringify(resultRopsten.bytecodeRopsten), function (err) {
+    fs.writeFile('Export/bytecodeRopsten.json', JSON.stringify(resultRopsten.bytecodeRopsten), function (err) {
       if (err) return console.log(err);
       console.log('bytecodeRopsten > bytecodeRopsten.json');
     });
     
-    fs.writeFile('bytecodeRopstenTest.json', JSON.stringify(resultTestModulRopsten.bytecodeRopstenTest), function (err) {
+    fs.writeFile('Export/bytecodeRopstenTest.json', JSON.stringify(resultTestModulRopsten.bytecodeRopstenTest), function (err) {
       if (err) return console.log(err);
       console.log('bytecodeRopstenTest > bytecodeRopstenTest.json');
     });
